@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14.1
+    ports:
+      - '54320:5432'
+    env_file:
+      - .env
+    volumes:
+      - transcendence-db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - '4210:80'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - transcendence-pgadmin-data:/var/lib/pgadmin
+
+  api:
+    image: node:16.13
+    ports:
+      - '4211:3000'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - './api:/app:delegated'
+    working_dir: /app
+    command: 'yarn start:dev'
+
+  front:
+    image: node:16.13
+    ports:
+      - '4212:3000'
+    env_file:
+      - .env
+    volumes:
+      - './front:/app:delegated'
+    working_dir: /app
+    command: 'yarn start'
+
+volumes:
+  transcendence-db-data:
+    driver: local
+  transcendence-pgadmin-data:
+    driver: local
