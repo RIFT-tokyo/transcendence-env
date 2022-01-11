@@ -11,3 +11,8 @@ git clone https://github.com/RIFT-tokyo/transcendence-api.git api
 git clone https://github.com/RIFT-tokyo/transcendence-front.git front
 git clone https://github.com/RIFT-tokyo/transcendence-docs.git docs
 ```
+
+1. Build environments by docker compose
+```
+docker compose up -d
+```
