@@ -32,7 +32,8 @@ services:
     volumes:
       - './api:/app:delegated'
     working_dir: /app
-    command: 'yarn start:dev'
+    command: 'bash'
+    tty: true
 
   front:
     image: node:16.13
