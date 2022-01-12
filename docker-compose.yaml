@@ -36,7 +36,8 @@ services:
     tty: true
 
   front:
-    image: node:16.13
+    build:
+      context: front
     ports:
       - '4212:3000'
     env_file:
