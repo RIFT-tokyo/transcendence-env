@@ -22,7 +22,8 @@ services:
       - transcendence-pgadmin-data:/var/lib/pgadmin
 
   api:
-    image: node:16.13
+    build:
+      context: api
     ports:
       - '4211:3000'
     depends_on:
@@ -31,9 +32,9 @@ services:
       - .env
     volumes:
       - './api:/app:delegated'
+      - /app/node_modules
     working_dir: /app
     command: 'yarn start:dev'
-    tty: true
 
   front:
     build:
