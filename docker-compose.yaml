@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:14.1
     ports:
-      - '54320:5432'
+      - '15432:5432'
     env_file:
       - .env
     volumes:
@@ -32,7 +32,7 @@ services:
     volumes:
       - './api:/app:delegated'
     working_dir: /app
-    command: 'bash'
+    command: 'yarn start:dev'
     tty: true
 
   front:
