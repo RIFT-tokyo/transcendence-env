@@ -49,6 +49,15 @@ services:
     working_dir: /app
     command: 'yarn start'
 
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - '4213:8080'
+    volumes:
+      - './docs/openapi.yaml:/openapi.yaml'
+    environment:
+      SWAGGER_JSON: /openapi.yaml
+
 volumes:
   transcendence-db-data:
     driver: local
