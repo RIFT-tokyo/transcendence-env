@@ -3,3 +3,5 @@ front
 docs
 
 .vscode
+
+.env
