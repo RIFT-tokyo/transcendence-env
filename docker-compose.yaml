@@ -34,7 +34,7 @@ services:
       - './api:/app:delegated'
       - /app/node_modules
     working_dir: /app
-    command: 'yarn start:dev'
+    command: 'yarn migration:run && yarn start:dev'
 
   front:
     build:
