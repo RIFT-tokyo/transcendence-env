@@ -34,10 +34,8 @@ services:
       cp -r /export/* /data/ &&
       /usr/bin/minio server /data"
     volumes:
-      - './docker/minio/data:/data'
-      - './docker/minio/export:/export'
-      - './docker/minio/config:/root/.minio'
-      - './docker/minio/policies:/policies'
+      - './minio/export:/export'
+      - './minio/policies:/policies'
 
   api:
     build:
@@ -78,6 +76,4 @@ services:
 
 volumes:
   transcendence-db-data:
-    driver: local
   transcendence-pgadmin-data:
-    driver: local
