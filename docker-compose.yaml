@@ -34,8 +34,8 @@ services:
       cp -r /export/* /data/ &&
       /usr/bin/minio server /data"
     volumes:
-      - './minio/export:/export'
-      - './minio/policies:/policies'
+      - 'transcendence-minio-data:/export/static'
+      - './minio/policy:/policies/buckets/static'
 
   api:
     build:
@@ -77,3 +77,4 @@ services:
 volumes:
   transcendence-db-data:
   transcendence-pgadmin-data:
+  transcendence-minio-data:
