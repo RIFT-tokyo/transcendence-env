@@ -2,6 +2,9 @@ api
 front
 docs
 
+docker/minio/config
+docker/minio/data
+
 .env
 
 .vscode
