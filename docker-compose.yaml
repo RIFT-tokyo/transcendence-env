@@ -52,7 +52,6 @@ services:
     command: |
       bash -c
       "yarn migration:run &&
-      PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER $POSTGRES_DB -f db/init.sql &&
       yarn start:dev"
 
   front:
