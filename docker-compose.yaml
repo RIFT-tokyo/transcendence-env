@@ -1,10 +1,10 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
     image: postgres:14.1
     ports:
-      - '15432:5432'
+      - "15432:5432"
     env_file:
       - .env
     volumes:
@@ -13,7 +13,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     ports:
-      - '4210:80'
+      - "4210:80"
     depends_on:
       - db
     env_file:
@@ -28,49 +28,52 @@ services:
     env_file:
       - .env
     entrypoint: sh
-    command: 
-      -c "mkdir -p /data/.minio.sys/buckets &&
+    command: -c "mkdir -p /data/.minio.sys/buckets &&
       cp -r /policies/* /data/.minio.sys/ &&
       cp -r /export/* /data/ &&
       /usr/bin/minio server /data"
     volumes:
-      - 'transcendence-minio-data:/export/static'
-      - './minio/policy:/policies/buckets/static'
+      - "transcendence-minio-data:/export/static"
+      - "./minio/policy:/policies/buckets/static"
 
   api:
     build:
       context: api
     ports:
-      - '4211:3000'
+      - "4211:3000"
     depends_on:
       - db
     env_file:
       - .env
     volumes:
-      - './api:/app:delegated'
+      - "./api:/app:delegated"
       - /app/node_modules
     working_dir: /app
-    command: 'yarn start:dev'
+    command: |
+      bash -c
+      "yarn migration:run &&
+      PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER $POSTGRES_DB -f db/init.sql &&
+      yarn start:dev"
 
   front:
     build:
       context: front
     ports:
-      - '4212:3000'
+      - "4212:3000"
     env_file:
       - .env
     volumes:
-      - './front:/app:delegated'
+      - "./front:/app:delegated"
       - /app/node_modules
     working_dir: /app
-    command: 'yarn start'
+    command: "yarn start"
 
   swagger-ui:
     image: swaggerapi/swagger-ui
     ports:
-      - '4213:8080'
+      - "4213:8080"
     volumes:
-      - './docs/openapi.yaml:/openapi.yaml'
+      - "./docs/openapi.yaml:/openapi.yaml"
     environment:
       SWAGGER_JSON: /openapi.yaml
 
