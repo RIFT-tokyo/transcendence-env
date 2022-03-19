@@ -30,10 +30,10 @@ services:
     entrypoint: sh
     command: -c "mkdir -p /data/.minio.sys/buckets &&
       cp -r /policies/* /data/.minio.sys/ &&
-      cp -r /export/* /data/ &&
+      mkdir -p /data/static &&
       /usr/bin/minio server /data"
     volumes:
-      - "transcendence-minio-data:/export/static"
+      - "transcendence-minio-data:/data"
       - "./minio/policy:/policies/buckets/static"
 
   api:
