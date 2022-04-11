@@ -48,6 +48,7 @@ services:
       context: front
     ports:
       - "4212:3000"
+      - "4210:4210"
     env_file:
       - .env
     volumes:
