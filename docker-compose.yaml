@@ -29,6 +29,7 @@ services:
     build:
       context: api
     ports:
+      - "4210:3000"
       - "4211:3000"
     depends_on:
       - db
