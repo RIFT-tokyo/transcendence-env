@@ -47,6 +47,7 @@ services:
     command: |
       bash -c
       "yarn migration:run &&
+      yarn seed:run -s AddAchievements &&
       yarn start:dev"
 
   front:
