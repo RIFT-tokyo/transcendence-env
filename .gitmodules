@@ -1,0 +1,9 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/RIFT-tokyo/transcendence-api.git
+[submodule "front"]
+	path = front
+	url = https://github.com/RIFT-tokyo/transcendence-front.git
+[submodule "docs"]
+	path = docs
+	url = https://github.com/RIFT-tokyo/transcendence-docs.git
